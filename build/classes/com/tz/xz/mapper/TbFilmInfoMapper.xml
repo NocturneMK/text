@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tz.xz.mapper.TbFilmInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.tz.xz.pojo.TbFilmInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="f_name" property="fName" jdbcType="VARCHAR" />
+    <result column="f_type" property="fType" jdbcType="VARCHAR" />
+    <result column="f_score" property="fScore" jdbcType="INTEGER" />
+    <result column="f_play_year" property="fPlayYear" jdbcType="INTEGER" />
+    <result column="f_origin" property="fOrigin" jdbcType="VARCHAR" />
+    <result column="f_pic" property="fPic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, f_name, f_type, f_score, f_play_year, f_origin, f_pic
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tz.xz.pojo.TbFilmInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_film_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_film_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_film_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tz.xz.pojo.TbFilmInfoExample" >
+    delete from tb_film_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tz.xz.pojo.TbFilmInfo" >
+    insert into tb_film_info (id, f_name, f_type, 
+      f_score, f_play_year, f_origin, 
+      f_pic)
+    values (#{id,jdbcType=INTEGER}, #{fName,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, 
+      #{fScore,jdbcType=INTEGER}, #{fPlayYear,jdbcType=INTEGER}, #{fOrigin,jdbcType=VARCHAR}, 
+      #{fPic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tz.xz.pojo.TbFilmInfo" >
+    insert into tb_film_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fName != null" >
+        f_name,
+      </if>
+      <if test="fType != null" >
+        f_type,
+      </if>
+      <if test="fScore != null" >
+        f_score,
+      </if>
+      <if test="fPlayYear != null" >
+        f_play_year,
+      </if>
+      <if test="fOrigin != null" >
+        f_origin,
+      </if>
+      <if test="fPic != null" >
+        f_pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null" >
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fScore != null" >
+        #{fScore,jdbcType=INTEGER},
+      </if>
+      <if test="fPlayYear != null" >
+        #{fPlayYear,jdbcType=INTEGER},
+      </if>
+      <if test="fOrigin != null" >
+        #{fOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="fPic != null" >
+        #{fPic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tz.xz.pojo.TbFilmInfoExample" resultType="java.lang.Integer" >
+    select count(*) from tb_film_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_film_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fName != null" >
+        f_name = #{record.fName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fType != null" >
+        f_type = #{record.fType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fScore != null" >
+        f_score = #{record.fScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.fPlayYear != null" >
+        f_play_year = #{record.fPlayYear,jdbcType=INTEGER},
+      </if>
+      <if test="record.fOrigin != null" >
+        f_origin = #{record.fOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPic != null" >
+        f_pic = #{record.fPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_film_info
+    set id = #{record.id,jdbcType=INTEGER},
+      f_name = #{record.fName,jdbcType=VARCHAR},
+      f_type = #{record.fType,jdbcType=VARCHAR},
+      f_score = #{record.fScore,jdbcType=INTEGER},
+      f_play_year = #{record.fPlayYear,jdbcType=INTEGER},
+      f_origin = #{record.fOrigin,jdbcType=VARCHAR},
+      f_pic = #{record.fPic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tz.xz.pojo.TbFilmInfo" >
+    update tb_film_info
+    <set >
+      <if test="fName != null" >
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null" >
+        f_type = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fScore != null" >
+        f_score = #{fScore,jdbcType=INTEGER},
+      </if>
+      <if test="fPlayYear != null" >
+        f_play_year = #{fPlayYear,jdbcType=INTEGER},
+      </if>
+      <if test="fOrigin != null" >
+        f_origin = #{fOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="fPic != null" >
+        f_pic = #{fPic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tz.xz.pojo.TbFilmInfo" >
+    update tb_film_info
+    set f_name = #{fName,jdbcType=VARCHAR},
+      f_type = #{fType,jdbcType=VARCHAR},
+      f_score = #{fScore,jdbcType=INTEGER},
+      f_play_year = #{fPlayYear,jdbcType=INTEGER},
+      f_origin = #{fOrigin,jdbcType=VARCHAR},
+      f_pic = #{fPic,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
